@@ -16,7 +16,6 @@ describe("Github page tests", () => {
   });
 
   test("The h1 header content'", async () => {
-    await page.setDefaultTimeout(40000);
     const firstLink = await page.$("header div div a");
     await firstLink.click();
     await page.waitForSelector("h1");
@@ -24,16 +23,14 @@ describe("Github page tests", () => {
     expect(title2).toEqual(
       "GitHub for teams · Build like the best teams on the planet · GitHub"
     );
-  });
+  }, 40000);
 
   test("The first link attribute", async () => {
-    await page.setDefaultTimeout(50000);
     const actual = await page.$eval("a", (link) => link.getAttribute("href"));
     expect(actual).toEqual("#start-of-content");
-  });
+  }, 50000);
 
   test("The page contains Sign in button", async () => {
-    await page.setDefaultTimeout(60000);
     const btnSelector = ".btn-large-mktg.btn-mktg";
     await page.waitForSelector(btnSelector, {
       visible: true,
@@ -42,7 +39,7 @@ describe("Github page tests", () => {
       link.textContent.trim()
     );
     expect(actual).toContain("Get started with Team");
-  });
+  }, 60000);
 });
 
 describe("Tests for task №2", () => {
